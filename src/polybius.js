@@ -65,19 +65,22 @@ const polybiusModule = (function () {
     };
 
     if (encode) {
-      let inputArray = input.toLowerCase().split("");
-      let finalWordArray = [];
+      let lowerCaseInput = input.toLowerCase();
+      let result = "";
 
-      for (let i = 0; i < inputArray.length; i++) {
-        finalWordArray.push(encodingObject[inputArray[i]]);
+      // add the new encoded number to the result string
+      for (let letter of lowerCaseInput) {
+        letter = encodingObject[letter];
+        result += letter;
       }
-
-      return finalWordArray.join("");
+      return result;
     }
 
     if (!encode) {
       let inputArray = input.split("");
+      let result = "";
 
+      // checking to see if quantity of numbers is even or odd
       let filteredArray = inputArray.filter((number) => number > 0);
       if (filteredArray.length % 2 === 1) {
         return false;
@@ -85,6 +88,7 @@ const polybiusModule = (function () {
 
       let combinedArray = [];
 
+      // adding the numbers to a new array as a complete pair
       for (let i = 0; i < inputArray.length; i++) {
         if (inputArray[i] > 0) {
           let digitA = inputArray[i];
@@ -93,13 +97,12 @@ const polybiusModule = (function () {
         } else combinedArray.push(inputArray[i]);
       }
 
-      let finalNumberArray = [];
-
-      for (let i = 0; i < combinedArray.length; i++) {
-        finalNumberArray.push(decodingObject[combinedArray[i]]);
+      // add number to the result string as a decoded letter
+      for (let number of combinedArray) {
+        number = decodingObject[number];
+        result += number;
       }
-
-      return finalNumberArray.join("");
+      return result;
     }
   }
 
